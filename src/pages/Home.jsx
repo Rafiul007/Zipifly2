@@ -1,7 +1,9 @@
 import React from 'react'
 import './Home.css'
 import { Button, TextField } from '@mui/material'
+import DeliveryCalculator from '../components/DeliveryCalculator'
 const Home = () => {
+    const data = ['Delivery all over Bangladesh only at Tk99. Inside dhaka Tk45', ' Dhaka Express delivery(within 6hr) only at 99tk', "Incognito Deliery. Don't reveile your personal information "]
     return (
         <div className='home-container'>
             {/* Navbar */}
@@ -25,6 +27,21 @@ const Home = () => {
                     <TextField id="outlined-basic" label="Parcel Id" fullWidth variant="outlined" />
                     <Button variant="contained" color='success' >Track</Button>
                 </div>
+            </div>
+            {/* sub hero section */}
+            <div className="sub-hero">
+                {
+                    data.map((item) => {
+                        return (
+                            <div className='feture-container'>
+                                <h1>{item}</h1>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+            <div className="calculatorsection">
+                <DeliveryCalculator />
             </div>
         </div>
     )

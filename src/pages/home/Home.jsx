@@ -3,6 +3,7 @@ import "./Home.css";
 import { Button, TextField } from "@mui/material";
 import DeliveryCalculator from "../../components/DeliveryCalculator";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
 
 const Home = () => {
   const data = [
@@ -13,15 +14,7 @@ const Home = () => {
   return (
     <div className="home-container">
       {/* Navbar */}
-      <div className="navbar-container">
-        <div className="logo-container">
-          <h1>Zipifly</h1>
-        </div>
-        <div className="button-container">
-          <Button variant="contained"><Link to='/login'>Login</Link></Button>
-          <Button variant="contained"><Link to='/signup'>Signup</Link></Button>
-        </div>
-      </div>
+      {/* <Navbar/> */}
       {/* Hero section */}
       <div className="hero-container">
         <div className="hero-banner">

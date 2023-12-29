@@ -6,7 +6,7 @@ function Navbar() {
     return (
         <div className="navbar-container">
             <div className="logo-container">
-                <h1>Zipifly</h1>
+                <Link to='/'><h1>Zipifly</h1></Link>
             </div>
             <div className="button-container">
                 <Button variant="contained"><Link to='/login'>Login</Link></Button>

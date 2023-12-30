@@ -2,8 +2,6 @@ import React from "react";
 import "./Home.css";
 import { Button, TextField } from "@mui/material";
 import DeliveryCalculator from "../../components/DeliveryCalculator";
-import { Link } from "react-router-dom";
-import Navbar from "../../components/navbar/Navbar";
 
 const Home = () => {
   const data = [

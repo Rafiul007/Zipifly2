@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import { Button, TextField } from "@mui/material";
-import DeliveryCalculator from "../../components/DeliveryCalculator";
+import DeliveryCalculator from "../../components/deliveryCalculator/DeliveryCalculator";
 
 const Home = () => {
   const data = [

@@ -1,0 +1,8 @@
+.page-footer{
+    background-color: #020202;
+    color: white;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </div>
   );

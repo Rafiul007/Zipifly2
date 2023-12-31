@@ -26,11 +26,29 @@
       margin-left: 80px;
   }
   .button-container {
-    max-width: 350px;
+    max-width: 250px;
     width: 100%;
     /* border: 2px solid red; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin-right: 70px;
+  }
+  .menu-container {
+    width: 250px;
+  }
+  .menu-container ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    /* border: 2px solid red; */
+    padding: 0px 2px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .menu-container a{
+    text-decoration: none;
+    color: black;
   }

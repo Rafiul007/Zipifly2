@@ -8,6 +8,13 @@ function Navbar() {
             <div className="logo-container">
                 <Link to='/'><h1>Zipifly</h1></Link>
             </div>
+            <div className="menu-container">
+                <ul>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='/services'>Services</Link></li>
+                    <li><Link to='/about-us'>About us</Link></li>
+                </ul>
+            </div>
             <div className="button-container">
                 <Button variant="contained"><Link to='/login'>Login</Link></Button>
                 <Button variant="contained"><Link to='/signup'>Signup</Link></Button>

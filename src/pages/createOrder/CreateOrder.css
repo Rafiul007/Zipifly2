@@ -1,0 +1,32 @@
+.create-order-container{
+    max-width: 1200px;
+    width: 100%;
+    margin: 100px auto;
+}
+.form-input-container input{
+    background: white;
+}
+.delivery-info-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.cash-fields{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.invoice-fields{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.category-fields{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+}

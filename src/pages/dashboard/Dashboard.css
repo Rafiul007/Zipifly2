@@ -1,0 +1,49 @@
+.dashboard-container{
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+}
+.create-parcel-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    /* border: 2px solid red; */
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px 0px;
+}
+.btn-cnt{
+    text-align: right;
+    margin: 10px 0px;
+}
+.btn-cnt a{
+    text-decoration: none;
+    color: white;
+}
+.tracking-parcel-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    /* border: 2px solid red; */
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px 0px;
+}
+.tracking-parcel-container input{
+    background: white;
+}
+.packaging{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    /* border: 2px solid red; */
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px 0px;
+}

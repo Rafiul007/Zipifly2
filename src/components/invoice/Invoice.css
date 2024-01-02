@@ -1,0 +1,28 @@
+.invoice-container{
+    display: flex;
+    flex-direction: column;
+    background: #f3f3f3;
+    padding: 20px 15px;
+    border-radius: 10px;
+}
+.address{
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(50, 50, 50);
+}
+.cash{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+.delivery-charges{
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(50, 50, 50);
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    font-weight: 600;
+}

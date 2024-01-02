@@ -18,8 +18,8 @@ function CreateORder() {
             <div className="pack-cont">
                 <div className="packaging">
                     <h1>Packaging convenience!</h1>
-                    <p>Worried about the packaging of your parcel? Don't worry, the right packaging solution is now available at RedX. Order now...</p>
-                    <Button variant="contained" color="success">Order now</Button>
+                    <p>Worried about the packaging of your parcel? Don't worry, the right packaging solution is now available at Zipifly. Order now...</p>
+                    <Button variant="contained" color="primary">Order now</Button>
                 </div>
             </div>
             <div className="form-cont">
@@ -105,7 +105,7 @@ function CreateORder() {
                                 </div>
                             </div>
                             <div className="btn-cont">
-                                <Button color="primary" variant="contained" type="submit">Create</Button>
+                                <Button color="success" variant="contained" type="submit">Create</Button>
                                 <Button color="error" variant="outlined" type="submit"><Link to='/dashboard'>Cancel</Link></Button>
                             </div>
                         </form>

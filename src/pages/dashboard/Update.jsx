@@ -1,14 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Login from '../login/Login'
 import Dashboard from './Dashboard'
 function Update() {
-    const [token, setToken] = useState(null)
+    const storedToken = localStorage.getItem('token');
+    const [token, setToken] = useState(storedToken || null);
+
+    useEffect(() => {
+        if (storedToken) {
+            setToken(storedToken);
+            // const decodedToken = decodeToken(storedToken);
+            // setUid(decodedToken.userId);
+        }
+    }, [storedToken]);
+    const handleLogout = () => {
+        console.log("Hello world");
+        setToken(null);
+        localStorage.removeItem('token');
+    };
     return (
         <div>
             {!token ? (
                 <Login setToken={setToken} />
             ) : (
-                <Dashboard token={token} />
+                <Dashboard token={token} onLogout={handleLogout} />
             )
             }
         </div>

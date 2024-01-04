@@ -16,7 +16,7 @@ function Navbar() {
                 </ul>
             </div>
             <div className="button-container">
-                <Button variant="contained"><Link to='/login'>Login</Link></Button>
+                <Button variant="contained"><Link to='/welcome'>Login</Link></Button>
                 <Button variant="contained"><Link to='/signup'>Signup</Link></Button>
             </div>
         </div>

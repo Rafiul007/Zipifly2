@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
-import { TextField, Button, Autocomplete, FormControlLabel, Checkbox } from '@mui/material';
+import { TextField, Button, Autocomplete, FormControlLabel, Checkbox, Alert } from '@mui/material';
 import './CreateOrder.css'
 import Invoice from '../../components/invoice/Invoice';
 import { Link } from 'react-router-dom';
@@ -22,6 +22,7 @@ function CreateORder() {
                     <Button variant="contained" color="primary">Order now</Button>
                 </div>
             </div>
+            <Alert severity="info">Parcel requests made after 3 pm will be picked the next day</Alert>
             <div className="form-cont">
                 <div className="left-side">
                     <h1>Create Order</h1>
@@ -116,7 +117,7 @@ function CreateORder() {
                 </div>
             </div>
 
-
+{/* https://codeculturepro.medium.com/5-simple-steps-for-authentication-and-authorization-in-mern-stack-952fa31fe2ae */}
 
         </div>
     )

@@ -2,6 +2,7 @@ import { TextField, Button } from '@mui/material'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import React from 'react'
+import axios from "axios";
 import './Signup.css'
 
 const validationSchema = yup.object({
@@ -9,7 +10,7 @@ const validationSchema = yup.object({
   email: yup.string('Enter your email').email('Enter a valid email').required('Email is required'),
   password: yup.string('Enter your password').min(8, 'Password should be of minimum 8 characters length').required('Password is required'),
   confirmPassword: yup.string("Enter confirm password").oneOf([yup.ref('password')], "Password must match"),
-  mobile: yup.string("Enter valid phone number").min(11, "Mobile number has 11 numebrs").max(11, "Mobile number has 11 numbers").required("Mobile number is required")
+  contactNumber: yup.string("Enter valid phone number").min(11, "contactNumber number has 11 numebrs").max(11, "contactNumber number has 11 numbers").required("contactNumber number is required")
 });
 function Signup() {
   const formik = useFormik({
@@ -18,12 +19,30 @@ function Signup() {
       email: '',
       password: '',
       confirmPassword: '',
-      mobile: '',
+      contactNumber: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      console.log(values)
+    onSubmit: async (values) => {
+      // console.log(e);
+      // console.log(values.email)
+      try {
+        // // alert(JSON.stringify(values, null, 2));
+        // console.log(values)
+        // use post method to send the to the backend
+        const newUser = {
+          fullname: values.fullname,
+          email: values.email,
+          password: values.password,
+          contactNumber: values.contactNumber
+        }
+        console.log(newUser)
+        const res = await axios.post('http://localhost:3002/user/', newUser);
+        console.log(res.data);
+        alert('Registration successful!');
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Registration failed. Please try again.');
+      }
     },
   });
   return (
@@ -37,14 +56,14 @@ function Signup() {
         <TextField id="fullname" name='fullname' label="Full Name" variant="outlined" value={formik.values.fullname}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.email && Boolean(formik.errors.fullname)}
+          error={formik.touched.fullname && Boolean(formik.errors.fullname)}
           helperText={formik.touched.fullname && formik.errors.fullname} fullWidth />
 
-        <TextField id="mobile" name='mobile' label="Mobile number" variant="outlined" value={formik.values.mobile}
+        <TextField id="contactNumber" name='contactNumber' label="contactNumber number" variant="outlined" value={formik.values.contactNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.mobile && Boolean(formik.errors.mobile)}
-          helperText={formik.touched.mobile && formik.errors.mobile} fullWidth />
+          error={formik.touched.contactNumber && Boolean(formik.errors.contactNumber)}
+          helperText={formik.touched.contactNumber && formik.errors.contactNumber} fullWidth />
 
         <TextField id="email" name='email' label="Email" variant="outlined" value={formik.values.email}
           onChange={formik.handleChange}
@@ -55,7 +74,7 @@ function Signup() {
         <TextField id="password" name='password' label="Password" variant="outlined" value={formik.values.password} type='password'
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.email && Boolean(formik.errors.password)}
+          error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password} fullWidth />
 
         <TextField id="confirmPassword" name='confirmPassword' label="Confirm Password" variant="outlined" value={formik.values.confirmPassword}

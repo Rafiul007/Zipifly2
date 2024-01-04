@@ -22,7 +22,7 @@ function Signup() {
       contactNumber: '',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       // console.log(e);
       // console.log(values.email)
       try {
@@ -39,6 +39,7 @@ function Signup() {
         const res = await axios.post('http://localhost:3002/user/', newUser);
         console.log(res.data);
         alert('Registration successful!');
+        resetForm()
       } catch (error) {
         console.error('Error submitting form:', error);
         alert('Registration failed. Please try again.');

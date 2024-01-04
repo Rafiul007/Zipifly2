@@ -3,22 +3,28 @@ import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button } from '@mui/material';
 import './Login.css'; // Assuming you have a CSS file for styling
-
+import axios from 'axios';
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email').required('Required*'),
   password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required*'),
 });
 
-function Login() {
+function Login({setToken}) {
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       // alert(JSON.stringify(values, null, 2));
       console.log(values)
+      try {
+        const response = await axios.post('http://localhost:3002/user/login', values);
+        setToken(response.data.token);
+      } catch (error) {
+        console.error(error);
+      }
     },
   })
   return (

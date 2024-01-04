@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./pages/dashboard/Dashboard";
 import CreateORder from "./pages/createOrder/CreateORder";
+import Update from "./pages/dashboard/Update";
 function App() {
   return (
     <div className="App">
@@ -15,9 +16,8 @@ function App() {
       <Navbar/>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/login" element={<Update/>}></Route>
           <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/dashboard" element={<Dashboard/>}></Route>
           <Route path="/create-parcel" element={<CreateORder/>}></Route>
         </Routes>
         <Footer/>

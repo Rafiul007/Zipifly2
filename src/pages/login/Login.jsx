@@ -22,7 +22,7 @@ function Login({ setToken }) {
         setToken(response.data.token);
         localStorage.setItem('token', response.data.token);
       } catch (error) {
-        console.error(error);
+        alert("Invalid Email or Password")
       }
     },
   })

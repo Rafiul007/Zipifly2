@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button, Autocomplete, FormControlLabel, Checkbox, Alert } from '@mui/material';
@@ -6,6 +7,48 @@ import './CreateOrder.css'
 import Invoice from '../../components/invoice/Invoice';
 import { Link } from 'react-router-dom';
 function CreateORder() {
+    const storedToken = localStorage.getItem('token');
+    const [token, setToken] = useState(storedToken || null);
+    //function to decode jwt token
+    const decodeToken = (token) => {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(atob(base64));
+    };
+    const userData = decodeToken(token);
+    const userId = userData.userId;
+    const [profileInfo, setProfileInfo] = useState({
+        username: "",
+        email: "",
+        contactNumber: "",
+        fullname: ""
+    });
+    useEffect(() => {
+        try {
+            axios.get("http://localhost:3002/user/profile/" + userId, {
+                headers: { Authorization: "Bearer " + token },
+            })
+                .then((res) => {
+                    if (!res.data) throw new Error();
+                    else {
+                        const { username, email, contactNumber, fullname } = res.data;
+                        setProfileInfo({
+                            username: username || "",
+                            email: email || "",
+                            contactNumber: contactNumber || "",
+                            fullname: fullname || ""
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching profile data: ", error);
+                });
+        } catch (error) {
+            console.error("Error in useEffect: ", error);
+        }
+    }, [userId, token]);
+
+
     const category = [
         { label: "Electronics", value: 1 },
         { label: "Furniture", value: 2 },
@@ -107,17 +150,17 @@ function CreateORder() {
                             </div>
                             <div className="btn-cont">
                                 <Button color="success" variant="contained" type="submit">Create</Button>
-                                <Button color="error" variant="outlined" type="submit"><Link to='/dashboard'>Cancel</Link></Button>
+                                <Button color="error" variant="outlined"><Link to='/welcome'>Cancel</Link></Button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div className="right-side">
-                    <Invoice />
+                    <Invoice fullname={profileInfo.fullname} />
                 </div>
             </div>
 
-{/* https://codeculturepro.medium.com/5-simple-steps-for-authentication-and-authorization-in-mern-stack-952fa31fe2ae */}
+            {/* https://codeculturepro.medium.com/5-simple-steps-for-authentication-and-authorization-in-mern-stack-952fa31fe2ae */}
 
         </div>
     )

@@ -13,7 +13,6 @@ function Update() {
         }
     }, [storedToken]);
     const handleLogout = () => {
-        console.log("Hello world");
         setToken(null);
         localStorage.removeItem('token');
     };

@@ -16,8 +16,8 @@ function Navbar() {
                 </ul>
             </div>
             <div className="button-container">
-                <Button variant="contained"><Link to='/welcome'>Login</Link></Button>
-                <Button variant="contained"><Link to='/signup'>Signup</Link></Button>
+                <Button variant="outlined" color='success'><Link to='/welcome'>Dashboard</Link></Button>
+                <Button variant="outlined"><Link to='/signup'>Signup</Link></Button>
             </div>
         </div>
     )

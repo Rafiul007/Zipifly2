@@ -1,10 +1,10 @@
 import React from 'react'
 import './Invoice.css'
 import { Button } from '@mui/material'
-function Invoice() {
+function Invoice({fullname}) {
   return (
     <div className="invoice-container">
-      <h1>mrRafie</h1>
+      <h1>{fullname}</h1>
       <div className="address">
         <p>Your Pickup Address:</p>
         <p>7/A north south twin tower</p>

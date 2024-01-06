@@ -3,6 +3,7 @@ import './Dashboard.css'
 import { Button, TextField } from "@mui/material";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Parcel from '../../components/parcel/Parcel';
 
 function Dashboard({ token, onLogout }) {
   const decodeToken = (token) => {
@@ -42,6 +43,42 @@ function Dashboard({ token, onLogout }) {
       console.error("Error in useEffect: ", error);
     }
   }, [userId, token]);
+  // track a parcel
+  const [trackNumber, setTrackNumber] = useState('');
+  const [parcel, setParcel] = useState({
+    id: '',
+    status: '',
+    sender: '',
+    receiver: '',
+    weight: 0,
+    category: '',
+    totalCash: 0
+  })
+  const handleTrackParcel = async () => {
+    try {
+      // GET method: get parcel details by parcel _id
+      let response = await axios.get("http://localhost:3002/parcel/" + trackNumber,
+        { headers: { Authorization: "Bearer " + token } })
+      // check if the parcel is found or not
+      if (!response.data) {
+        alert("No Parcel Found with this Tracking Number");
+      } else {
+        setParcel({
+          id: response.data._id,
+          status: response.data.status,
+          sender: response.data.sender.fullname,
+          receiver: response.data.receiver.fullname,
+          weight: response.data.weight,
+          category: response.data.category,
+          totalCash: response.data.totalCash,
+        }
+        );
+        console.log(parcel)
+      }
+    } catch (error) {
+      alert(`Error tracking parcel: ${error}`);
+    }
+  }
   return (
     <div className='dashboard-container'>
       <h1>Welcome to {profileInfo.fullname}!</h1>
@@ -57,11 +94,18 @@ function Dashboard({ token, onLogout }) {
           label="Parcel Id"
           fullWidth
           variant="outlined"
+          onChange={e => setTrackNumber(e.target.value)}
         />
-        <Button variant="contained" color="success">
-          Track
-        </Button>
+        <Button variant="contained" color="success" onClick={handleTrackParcel}>Track</Button>
       </div>
+      <Parcel id={parcel.id}
+      status={parcel.status}
+      sender={parcel.sender}
+      receiver={parcel.receiver}
+      weight={`${parcel.weight} kg`}
+      category={parcel.category}
+      totalCash={parcel.totalCash}
+      />
       <div className="create-parcel-container">
         <h1>Create your parcel</h1>
         <p>Our rider will deliver your parcel without reveling your location</p>

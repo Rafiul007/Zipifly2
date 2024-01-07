@@ -80,7 +80,7 @@ function Signup() {
           error={formik.touched.fullname && Boolean(formik.errors.fullname)}
           helperText={formik.touched.fullname && formik.errors.fullname} fullWidth />
 
-        <TextField id="contactNumber" name='contactNumber' label="contactNumber number" variant="outlined" value={formik.values.contactNumber}
+        <TextField id="contactNumber" name='contactNumber' label="Phone number" variant="outlined" value={formik.values.contactNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.touched.contactNumber && Boolean(formik.errors.contactNumber)}

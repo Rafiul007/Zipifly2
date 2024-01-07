@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { TextField, Button, Autocomplete, FormControlLabel, Checkbox, Alert, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { TextField, Button,  Alert, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import './CreateOrder.css'
 import Invoice from '../../components/invoice/Invoice';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 // form validation for create parcel
 const validationSchema = yup.object({
     receiver: yup.string().required("Required"),
@@ -18,7 +18,7 @@ const validationSchema = yup.object({
 
 
 function CreateORder() {
-    
+    const navigate = useNavigate();
     const storedToken = localStorage.getItem('token');
     const [token, setToken] = useState(storedToken || null);
     //function to decode jwt token
@@ -43,12 +43,14 @@ function CreateORder() {
                 .then((res) => {
                     if (!res.data) throw new Error();
                     else {
-                        const { username, email, contactNumber, fullname } = res.data;
+                        const { username, email, contactNumber, fullname, address, district } = res.data;
                         setProfileInfo({
                             username: username || "",
                             email: email || "",
                             contactNumber: contactNumber || "",
-                            fullname: fullname || ""
+                            fullname: fullname || "",
+                            address: address || "",
+                            district: district || "",
                         });
                     }
                 })
@@ -60,6 +62,10 @@ function CreateORder() {
         }
     }, [userId, token]);
     //calculate total cash
+    //callback function for totalCash
+    const updateTotalCash = (value) => {
+        formik.values.totalCash = value;
+    }
     // formik form handle
     const formik = useFormik({
         initialValues: {
@@ -72,9 +78,28 @@ function CreateORder() {
 
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => {
-            values.sender= profileInfo.username;
-            console.log(values)
+        onSubmit: async (values) => {
+            values.sender = profileInfo.username;
+            const newParcel = {
+                sender: values.sender,
+                receiver: values.receiver,
+                weight: Number(values.weight),
+                category: values.category,
+                cashCollection: Number(values.cashCollection),
+                totalCash: values.totalCash
+            }
+            console.log("Testing newParcel: ", newParcel)
+            try {
+                await axios.post('http://localhost:3002/parcel/', newParcel, {
+                    headers:
+                        { 'Authorization': `Bearer ${token}` }
+                }).then(() => {
+                    alert('Your parcel has been sent!')
+                    navigate("/welcome");
+                })
+            } catch (err) {
+                console.log(err.response.data.message);
+            }
         },
     });
     const category = [
@@ -172,7 +197,7 @@ function CreateORder() {
                     </div>
                 </div>
                 <div className="right-side">
-                    <Invoice fullname={profileInfo.fullname} />
+                    <Invoice fullname={profileInfo.fullname} address={profileInfo.address} district={profileInfo.district} cashCollection={formik.values.cashCollection} updateTotalCash={updateTotalCash} />
                 </div>
             </div>
 

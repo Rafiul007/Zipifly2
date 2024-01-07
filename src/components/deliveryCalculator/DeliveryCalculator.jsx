@@ -1,7 +1,16 @@
 import React from 'react'
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import { TextField, Button, Autocomplete, FormControlLabel, Checkbox, Alert, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import './DeliveryCalculator.css'
 const DeliveryCalculator = () => {
+    const dis = [
+        { label: "Dhaka", value: 1 },
+        { label: "Rajshahi", value: 2 },
+        { label: "Khulna", value: 3 },
+        { label: "Chattogram", value: 4 },
+        { label: " Sylhet", value: 5 },
+        { label: " Mymensingh ", value: 6 },
+        { label: " Rangpur", value: 7 },
+    ]
     // use formik for form validation
     return (
         <div className="calculator-container">
@@ -18,29 +27,39 @@ const DeliveryCalculator = () => {
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Pickup Zone</InputLabel>
                         <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // value={age}
+                            labelId="pickup zone"
+                            id="Pickup Zone"
+                            name="Pickup Zone"
+                            // value={formik.values.Pickup Zone}
                             label="Pickup Zone"
-                        // onChange={handleChange}
+                            // onChange={formik.handleChange}
+                            // onBlur={formik.handleBlur}
+                            // error={formik.touched.Pickup Zone && Boolean(formik.errors.Pickup Zone)}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            {dis.map((option) => (
+                                <MenuItem key={option.value} value={option.label}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Delivery Zone</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Drop zone</InputLabel>
                         <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // value={age}
-                            label="Delivery Zone"
-                        // onChange={handleChange}
+                            labelId="Drop zone"
+                            id="Drop zone"
+                            name="Drop zone"
+                            // value={formik.values.Drop zone}
+                            label="Drop Zone"
+                            // onChange={formik.handleChange}
+                            // onBlur={formik.handleBlur}
+                            // error={formik.touched.Drop zone && Boolean(formik.errors.Drop zone)}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            {dis.map((option) => (
+                                <MenuItem key={option.value} value={option.label}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                 </div>

@@ -12,6 +12,7 @@
 .calculator-input-container{
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 .input-row{
     width: 100%;
@@ -19,6 +20,6 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 10px;
 }

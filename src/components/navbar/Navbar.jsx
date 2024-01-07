@@ -6,7 +6,9 @@ function Navbar() {
     return (
         <div className="navbar-container">
             <div className="logo-container">
-                <Link to='/'><h1>Zipifly</h1></Link>
+                <Link to='/'>
+                    <h1>Zipifly</h1>
+                </Link>
             </div>
             <div className="menu-container">
                 <ul>

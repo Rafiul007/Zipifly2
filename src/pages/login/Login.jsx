@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { TextField, Button } from '@mui/material';
 import './Login.css'; // Assuming you have a CSS file for styling
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email').required('Required*'),
   password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required*'),
@@ -56,9 +57,8 @@ function Login({ setToken }) {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button color="primary" variant="contained" type="submit">
-          Login
-        </Button>
+        <Button color="success" variant="contained" type="submit">Login</Button>
+        <Button color="primary"  variant="contained"><Link to='/signup'>Signup</Link></Button>
       </form>
     </div>
   );

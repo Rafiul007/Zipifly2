@@ -9,6 +9,7 @@ import Footer from "./components/footer/Footer";
 
 import CreateORder from "./pages/createOrder/CreateORder";
 import Update from "./pages/dashboard/Update";
+import Parcels from "./pages/all parcels/Parcels.jsx";
 function App() {
   return (
     <div className="App">
@@ -18,7 +19,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/welcome" element={<Update/>}></Route>
           <Route path="/signup" element={<Signup />}></Route>
-          {/* <Route path="/dashboard" element={<Dashboard/>}></Route> */}
+          <Route path="/all-parcels" element={<Parcels/>}></Route>
           <Route path="/create-parcel" element={<CreateORder/>}></Route>
         </Routes>
         <Footer/>

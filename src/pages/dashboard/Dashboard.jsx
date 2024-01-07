@@ -96,18 +96,21 @@ function Dashboard({ token, onLogout }) {
           variant="outlined"
           onChange={e => setTrackNumber(e.target.value)}
         />
-        <Button variant="contained" color="success" onClick={handleTrackParcel}>Track</Button>
+        <div className="btn-con">
+          <Button variant="contained" color="success" onClick={handleTrackParcel}>Track</Button>
+          <Button variant="contained" color="error" onClick={() => setParcel({})}>Cancel</Button>
+        </div>
       </div>
       {/* display information of the parcel */}
-      {parcel.weight>0 ? <Parcel id={parcel.id}
-      status={parcel.status}
-      sender={parcel.sender}
-      receiver={parcel.receiver}
-      weight={`${parcel.weight} kg`}
-      category={parcel.category}
-      totalCash={parcel.totalCash}
+      {parcel.weight > 0 ? <Parcel id={parcel.id}
+        status={parcel.status}
+        sender={parcel.sender}
+        receiver={parcel.receiver}
+        weight={`${parcel.weight} kg`}
+        category={parcel.category}
+        totalCash={parcel.totalCash}
       /> : <div className="null"></div>}
-  
+
       <div className="create-parcel-container">
         <h1>Create your parcel</h1>
         <p>Our rider will deliver your parcel without reveling your location</p>
@@ -115,8 +118,12 @@ function Dashboard({ token, onLogout }) {
           <Button variant="contained"><Link to='/create-parcel'>Create</Link></Button>
         </div>
       </div>
+      <div className="create-parcel-container">
+        <h1>See your all parcels</h1>
+        <p>Track all of your parcels easily</p>
+        <Button variant="contained"><Link to='/all-parcels'>All Parcels</Link></Button>
+      </div>
       <Button variant="contained" color='error' onClick={onLogout}>Logout</Button>
-      {/* <Button variant="contained" color='error' onClick={fetchUser}>click</Button> */}
     </div>
   )
 }

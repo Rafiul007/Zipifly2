@@ -22,6 +22,12 @@
     text-decoration: none;
     color: white;
 }
+.btn-con{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
 .tracking-parcel-container{
     display: flex;
     flex-direction: column;

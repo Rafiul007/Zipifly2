@@ -17,7 +17,6 @@ function Navbar() {
             </div>
             <div className="button-container">
                 <Button variant="outlined" color='success'><Link to='/welcome'>Dashboard</Link></Button>
-                <Button variant="outlined"><Link to='/signup'>Signup</Link></Button>
             </div>
         </div>
     )

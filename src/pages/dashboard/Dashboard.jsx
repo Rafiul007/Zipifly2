@@ -98,14 +98,16 @@ function Dashboard({ token, onLogout }) {
         />
         <Button variant="contained" color="success" onClick={handleTrackParcel}>Track</Button>
       </div>
-      <Parcel id={parcel.id}
+      {/* display information of the parcel */}
+      {parcel.weight>0 ? <Parcel id={parcel.id}
       status={parcel.status}
       sender={parcel.sender}
       receiver={parcel.receiver}
       weight={`${parcel.weight} kg`}
       category={parcel.category}
       totalCash={parcel.totalCash}
-      />
+      /> : <div className="null"></div>}
+  
       <div className="create-parcel-container">
         <h1>Create your parcel</h1>
         <p>Our rider will deliver your parcel without reveling your location</p>

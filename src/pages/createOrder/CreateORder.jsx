@@ -1,12 +1,24 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
-import * as Yup from 'yup';
-import { TextField, Button, Autocomplete, FormControlLabel, Checkbox, Alert } from '@mui/material';
+import * as yup from 'yup';
+import { TextField, Button, Autocomplete, FormControlLabel, Checkbox, Alert, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import './CreateOrder.css'
 import Invoice from '../../components/invoice/Invoice';
 import { Link } from 'react-router-dom';
+
+// form validation for create parcel
+const validationSchema = yup.object({
+    receiver: yup.string().required("Required"),
+    weight: yup.number("Invalid").required("Required"),
+    category: yup.string().required(),
+    cashCollection: yup.number().required("Required"),
+    totalCash: yup.number().required("Required")
+});
+
+
 function CreateORder() {
+    
     const storedToken = localStorage.getItem('token');
     const [token, setToken] = useState(storedToken || null);
     //function to decode jwt token
@@ -47,8 +59,24 @@ function CreateORder() {
             console.error("Error in useEffect: ", error);
         }
     }, [userId, token]);
+    //calculate total cash
+    // formik form handle
+    const formik = useFormik({
+        initialValues: {
+            sender: '',
+            receiver: '',
+            weight: '',
+            category: '',
+            cashCollection: '',
+            totalCash: '100',
 
-
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            values.sender= profileInfo.username;
+            console.log(values)
+        },
+    });
     const category = [
         { label: "Electronics", value: 1 },
         { label: "Furniture", value: 2 },
@@ -70,86 +98,74 @@ function CreateORder() {
                 <div className="left-side">
                     <h1>Create Order</h1>
                     <div className="form-section">
-                        <form className='form-input-container'>
+                        <form className='form-input-container' onSubmit={formik.handleSubmit}>
                             <h2>Customer information</h2>
                             <TextField
                                 fullWidth
-                                id="username"
-                                name="username"
-                                label="Username"
-                                type="username"
-                            //   value={formik.values.password}
-                            //   onChange={formik.handleChange}
-                            //   onBlur={formik.handleBlur}
-                            //   error={formik.touched.password && Boolean(formik.errors.password)}
-                            //   helperText={formik.touched.password && formik.errors.password}
+                                id="receiver"
+                                name="receiver"
+                                label="receiver"
+                                type="receiver"
+                                value={formik.values.receiver}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.receiver && Boolean(formik.errors.receiver)}
+                                helperText={formik.touched.receiver && formik.errors.receiver}
                             />
                             <h2>Delivery information</h2>
                             <div className="delivery-info-container">
                                 <div className='invoice-fields'>
                                     <TextField
                                         fullWidth
-                                        id="invoice"
-                                        name="invoice"
-                                        label="Invoice ID (optional)"
-                                        type="text"
-                                    //   value={formik.values.password}
-                                    //   onChange={formik.handleChange}
-                                    //   onBlur={formik.handleBlur}
-                                    //   error={formik.touched.password && Boolean(formik.errors.password)}
-                                    //   helperText={formik.touched.password && formik.errors.password}
-                                    />
-                                    <TextField
-                                        fullWidth
                                         id="weight"
                                         name="weight"
                                         label="Weight (gm)"
-                                        type="number"
-                                    //   value={formik.values.password}
-                                    //   onChange={formik.handleChange}
-                                    //   onBlur={formik.handleBlur}
-                                    //   error={formik.touched.password && Boolean(formik.errors.password)}
-                                    //   helperText={formik.touched.password && formik.errors.password}
+                                        type="weight"
+                                        value={formik.values.weight}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        error={formik.touched.weight && Boolean(formik.errors.weight)}
+                                        helperText={formik.touched.weight && formik.errors.weight}
                                     />
                                 </div>
                                 <div className='cash-fields'>
                                     <TextField
                                         fullWidth
-                                        id="cash-collection"
-                                        name="cash-collection"
+                                        id="cashCollection"
+                                        name="cashCollection"
                                         label="Cash Collection Amount"
-                                        type="number"
-                                    //   value={formik.values.password}
-                                    //   onChange={formik.handleChange}
-                                    //   onBlur={formik.handleBlur}
-                                    //   error={formik.touched.password && Boolean(formik.errors.password)}
-                                    //   helperText={formik.touched.password && formik.errors.password}
-                                    />
-                                    <TextField
-                                        fullWidth
-                                        id="selling-price"
-                                        name="selling-price"
-                                        label="Selling price of the product"
-                                        type="number"
-                                    //   value={formik.values.password}
-                                    //   onChange={formik.handleChange}
-                                    //   onBlur={formik.handleBlur}
-                                    //   error={formik.touched.password && Boolean(formik.errors.password)}
-                                    //   helperText={formik.touched.password && formik.errors.password}
+                                        type="text"
+                                        value={formik.values.cashCollection}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        error={formik.touched.cashCollection && Boolean(formik.errors.cashCollection)}
+                                        helperText={formik.touched.cashCollection && formik.errors.cashCollection}
                                     />
                                 </div>
                                 <div className="category-fields">
-                                    <Autocomplete
-                                        disablePortal
-                                        id="combo-box-demo"
-                                        fullWidth
-                                        options={category}
-                                        renderInput={(params) => <TextField {...params} label="Category" />}
-                                    />
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                                        <Select
+                                            labelId="category"
+                                            id="category"
+                                            name="category"
+                                            value={formik.values.category}
+                                            label="Category"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            error={formik.touched.category && Boolean(formik.errors.category)}
+                                        >
+                                            {category.map((option) => (
+                                                <MenuItem key={option.value} value={option.label}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
                                 </div>
                             </div>
                             <div className="btn-cont">
-                                <Button color="success" variant="contained" type="submit">Create</Button>
+                                <Button color="success" variant="contained" type='submit'>Create</Button>
                                 <Button color="error" variant="outlined"><Link to='/welcome'>Cancel</Link></Button>
                             </div>
                         </form>

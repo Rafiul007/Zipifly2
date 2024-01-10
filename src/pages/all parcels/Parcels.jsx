@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './Parcels.css'
 import axios from 'axios';
-import { Button, Chip } from '@mui/material';
+import { Alert, Button, Chip } from '@mui/material';
 function Parcels() {
     const token = localStorage.getItem('token');
     const decodeToken = (token) => {
@@ -40,9 +40,25 @@ function Parcels() {
         }
     }, [userId, token]);
     // const userId = userData.userId;
-    const rows = 1;// ----------------------------------------------------------------s-s-s-s-
+
+    //function for handle delete
+    async function handleDelete(id) {
+        await axios.delete(`http://localhost:3002/parcel/delete/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then((response) => {
+                alert("Successfully deleted parcel!");
+                window.location.reload();
+            })
+            .catch((err) => {
+                alert("Failed to delete parcel");
+                console.log(err);
+            });
+    }
     return (
         <div className='table-container'>
+            <Alert severity="info">You can only delete parcel where sender is you</Alert>
+            <Alert severity="warning">Deleting in transit parcel is not acceptable</Alert>
             <h1>Hello {username}, here is your parcel history</h1>
             <TableContainer>
                 <Table>
@@ -69,7 +85,7 @@ function Parcels() {
                                     <TableCell>{info.category}</TableCell>
                                     <TableCell>{info.totalCash}TK</TableCell>
                                     <TableCell><Chip label={info.status} color='primary' variant="outlined" /></TableCell>
-                                    <TableCell><Button variant="outlined" color='error' size='small'><DeleteIcon /></Button></TableCell>
+                                    <TableCell><Button variant="outlined" color='error' size='small' onClick={()=>handleDelete(info._id)}><DeleteIcon /></Button></TableCell>
                                 </TableRow>
                             )))
                             : "No Parcels to Show"

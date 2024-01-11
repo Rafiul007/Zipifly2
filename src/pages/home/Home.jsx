@@ -7,6 +7,7 @@ import log from './logo.png'
 import icon1 from './Icon1.png'
 import icon2 from './Icon2.png'
 import icon3 from './Icon-6.png'
+import google from './google.png'
 const Home = () => {
   const data = [
     // "Delivery all over Bangladesh only at Tk99. Inside dhaka Tk45",
@@ -40,6 +41,9 @@ const Home = () => {
           </div>
           <h2>No.1 secure delivery service in Bangladesh</h2>
           <Button variant="contained">Download App</Button>
+          <div className="play-logo">
+            <img src={google} alt="" />
+          </div>
         </div>
         <div className="tracking-container">
           <h2>Track your parcel</h2>
@@ -70,7 +74,7 @@ const Home = () => {
           <img src={bd} alt="bd" />
         </div>
         <div className="title-banner">
-          <h1>We are all over the <br/>Bangladesh</h1>
+          <h1>We are all over the <br />Bangladesh</h1>
           <p>Most secure delivery service in Bangladesh</p>
         </div>
       </div>

@@ -1,6 +1,7 @@
-import React from 'react'
-import { TextField, Button, Autocomplete, FormControlLabel, Checkbox, Alert, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import './DeliveryCalculator.css'
+import React, { useState } from 'react';
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import './DeliveryCalculator.css';
+
 const DeliveryCalculator = () => {
     const dis = [
         { label: "Dhaka", value: 1 },
@@ -10,31 +11,68 @@ const DeliveryCalculator = () => {
         { label: " Sylhet", value: 5 },
         { label: " Mymensingh ", value: 6 },
         { label: " Rangpur", value: 7 },
-    ]
-    // use formik for form validation
+    ];
+
+    const [pickup, setPickup] = useState('');
+    const [drop, setDrop] = useState('');
+    const [weight, setWeight] = useState('');
+    const [cash, setCash] = useState('');
+    const [total, setTotal] = useState(0)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Access the state variables here
+        console.log("Pickup:", pickup);
+        console.log("Drop:", drop);
+        console.log("Weight:", weight);
+        console.log("Cash:", cash);
+        // calculate total
+        // if pickup === "Dhaka" and drop=== "Dhaka" total is 60tk
+        if (pickup === "Dhaka" && drop === "Dhaka") {
+            var t = 60 + Number(weight) * 10;
+            setTotal(t)
+
+        }
+        else {
+            var t = 120 + Number(weight) * 10;
+            setTotal(t)
+        }
+    };
+    console.log(total)
     return (
         <div className="calculator-container">
             <div className="heading-container">
                 <h1>Delivery Calculator</h1>
-                <p>Get idea about shipment charge before shipment.</p>
+                <p>Get an idea about the shipment charge before shipment.</p>
             </div>
-            <div className="calculator-input-container">
+            <form className="calculator-input-container" onSubmit={handleSubmit}>
                 <div className="input-row">
-                    <TextField id="outlined-basic" fullWidth label="Weight(Max 10kg)" variant="outlined" />
-                    <TextField id="outlined-basic" fullWidth label="Cash Amount" variant="outlined" />
+                    <TextField
+                        id="outlined-basic"
+                        fullWidth
+                        label="Weight (Max 10kg)"
+                        variant="outlined"
+                        onChange={(e) => setWeight(e.target.value)}
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        fullWidth
+                        label="Cash Amount"
+                        variant="outlined"
+
+                        onChange={(e) => setCash(e.target.value)}
+                    />
                 </div>
                 <div className="input-row">
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Pickup Zone</InputLabel>
                         <Select
-                            labelId="pickup zone"
-                            id="Pickup Zone"
-                            name="Pickup Zone"
-                            // value={formik.values.Pickup Zone}
+                            labelId="pickup-zone"
+                            id="pickup-zone"
+                            name="pickup-zone"
                             label="Pickup Zone"
-                            // onChange={formik.handleChange}
-                            // onBlur={formik.handleBlur}
-                            // error={formik.touched.Pickup Zone && Boolean(formik.errors.Pickup Zone)}
+
+                            onChange={(e) => setPickup(e.target.value)}
                         >
                             {dis.map((option) => (
                                 <MenuItem key={option.value} value={option.label}>
@@ -44,16 +82,13 @@ const DeliveryCalculator = () => {
                         </Select>
                     </FormControl>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Drop zone</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Drop Zone</InputLabel>
                         <Select
-                            labelId="Drop zone"
-                            id="Drop zone"
-                            name="Drop zone"
-                            // value={formik.values.Drop zone}
+                            labelId="drop-zone"
+                            id="drop-zone"
+                            name="drop-zone"
                             label="Drop Zone"
-                            // onChange={formik.handleChange}
-                            // onBlur={formik.handleBlur}
-                            // error={formik.touched.Drop zone && Boolean(formik.errors.Drop zone)}
+                            onChange={(e) => setDrop(e.target.value)}
                         >
                             {dis.map((option) => (
                                 <MenuItem key={option.value} value={option.label}>
@@ -64,11 +99,17 @@ const DeliveryCalculator = () => {
                     </FormControl>
                 </div>
                 <div className="check-btn">
-                    <Button variant="contained">Check Rate</Button>
+                    <Button type="submit" variant="contained">
+                        Check Rate
+                    </Button>
                 </div>
+            </form>
+            <div className="total">
+                <p> Delivery rate is {total}</p>
+                <p> Collectable: {total+Number(cash)}</p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default DeliveryCalculator
+export default DeliveryCalculator;

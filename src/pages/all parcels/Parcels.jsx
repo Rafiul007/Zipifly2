@@ -10,6 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './Parcels.css'
 import axios from 'axios';
 import { Alert, Button, Chip } from '@mui/material';
+import { Link } from 'react-router-dom';
 function Parcels() {
     const token = localStorage.getItem('token');
     const decodeToken = (token) => {
@@ -93,6 +94,7 @@ function Parcels() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Button variant="contained"><Link to='/create-parcel'>Create a parcel</Link></Button>
         </div>
     )
 }

@@ -58,7 +58,7 @@ function Parcels() {
     }
     return (
         <div className='table-container'>
-            <Alert severity="info">You can only delete parcel where sender is you</Alert>
+            <Alert severity="info">You can only delete parcel where sender is you</Alert><br/>
             <Alert severity="warning">Deleting in transit parcel is not acceptable</Alert>
             <h1>Hello {username}, here is your parcel history</h1>
             <TableContainer>
@@ -79,7 +79,7 @@ function Parcels() {
                         {parcelInfo && parcelInfo.length > 0 ? (
                             parcelInfo.map((info) => (
                                 <TableRow key={info._id}>
-                                    <TableCell>{info._id} gm.</TableCell>
+                                    <TableCell>{info._id}</TableCell>
                                     <TableCell>{info.sender.username === username ? "You" : info.sender.username}</TableCell>
                                     <TableCell>{info.receiver.username === username ? "You" : info.receiver.username}</TableCell>
                                     <TableCell>{info.weight} gm.</TableCell>

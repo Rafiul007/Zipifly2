@@ -35,7 +35,7 @@ function Invoice({ fullname, address, district, cashCollection,updateTotalCash }
       </div>
       <div className="total">
         <p>Total amount:</p>
-        <span>{totalCash}Tk</span>
+        <span>{totalCash}Tk(cash one delivery)</span>
       </div>
     </div>
   )

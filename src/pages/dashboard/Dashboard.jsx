@@ -57,7 +57,7 @@ function Dashboard({ token, onLogout }) {
   const handleTrackParcel = async () => {
     try {
       // GET method: get parcel details by parcel _id
-      let response = await axios.get("http://localhost:3002/parcel/" + trackNumber,
+      let response = await axios.get("https://zipifly2-server.vercel.app/parcel/" + trackNumber,
         { headers: { Authorization: "Bearer " + token } })
       // check if the parcel is found or not
       if (!response.data) {

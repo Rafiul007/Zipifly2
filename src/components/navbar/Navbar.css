@@ -52,3 +52,23 @@
   text-decoration: none;
   color: black;
 }
+@media (max-width: 510px) {
+  .navbar-container{
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+  }
+  .logo-container{
+    margin: 0px;
+  }
+  .logo-container h1{
+    margin: 0px;
+    margin-top: 10px;
+  }
+  .button-container{
+    margin: 10px 0px;
+  }
+  .menu-container{
+    /* display: none; */
+  }
+}

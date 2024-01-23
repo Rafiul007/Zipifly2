@@ -20,7 +20,7 @@ function Navbar() {
             </div>
             <div className="button-container">
                 <Button variant="outlined" color='success'><Link to='/welcome'>{
-                    storedToken ? `Dashboard` : `Sign up / Log in`
+                    storedToken ? `Dashboard` : `Log in`
                 }</Link></Button>
             </div>
         </div>

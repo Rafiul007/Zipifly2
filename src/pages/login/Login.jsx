@@ -5,6 +5,7 @@ import { TextField, Button } from '@mui/material';
 import './Login.css'; // Assuming you have a CSS file for styling
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email').required('Required*'),
   password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required*'),
@@ -19,7 +20,7 @@ function Login({ setToken }) {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post('http://localhost:3002/user/login', values);
+        const response = await axios.post('https://zipifly2-server.vercel.app/user/login', values);
         setToken(response.data.token);
         localStorage.setItem('token', response.data.token);
       } catch (error) {

@@ -21,7 +21,7 @@ function Dashboard({ token, onLogout }) {
   });
   useEffect(() => {
     try {
-      axios.get("http://localhost:3002/user/profile/" + userId, {
+      axios.get("https://zipifly2-server.vercel.app/user/profile/" + userId, {
         headers: { Authorization: "Bearer " + token },
       })
         .then((res) => {

@@ -24,7 +24,7 @@ function Parcels() {
     const [parcelInfo, setParcelInfo] = useState([]);
     useEffect(() => {
         try {
-            axios.get("http://localhost:3002/user/parcels/" + userId, {
+            axios.get("https://zipifly2-server.vercel.app/user/parcels/" + userId, {
                 headers: { Authorization: "Bearer " + token },
             }).then((res) => {
                 if (!res.data) throw new Error();
@@ -44,7 +44,7 @@ function Parcels() {
 
     //function for handle delete
     async function handleDelete(id) {
-        await axios.delete(`http://localhost:3002/parcel/delete/${id}`, {
+        await axios.delete(`https://zipifly2-server.vercel.app/parcel/delete/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((response) => {

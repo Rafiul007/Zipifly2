@@ -39,11 +39,7 @@ function Signup() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      // console.log(e);
-      // console.log(values.email)
       try {
-        // // alert(JSON.stringify(values, null, 2));
-        // console.log(values)
         // use post method to send the to the backend
         const newUser = {
           fullname: values.fullname,
@@ -53,8 +49,7 @@ function Signup() {
           address: values.address,
           district: values.district
         }
-        console.log(newUser)
-        const res = await axios.post('http://localhost:3002/user/', newUser);
+        const res = await axios.post('https://zipifly2-server.vercel.app/user/', newUser);
         console.log(res.data);
         alert('Registration successful!');
         resetForm()

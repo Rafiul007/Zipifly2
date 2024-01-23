@@ -37,7 +37,7 @@ function CreateORder() {
     });
     useEffect(() => {
         try {
-            axios.get("http://localhost:3002/user/profile/" + userId, {
+            axios.get("https://zipifly2-server.vercel.app/user/profile/" + userId, {
                 headers: { Authorization: "Bearer " + token },
             })
                 .then((res) => {
@@ -90,7 +90,7 @@ function CreateORder() {
             }
             console.log("Testing newParcel: ", newParcel)
             try {
-                await axios.post('http://localhost:3002/parcel/', newParcel, {
+                await axios.post('https://zipifly2-server.vercel.app/parcel/', newParcel, {
                     headers:
                         { 'Authorization': `Bearer ${token}` }
                 }).then(() => {

@@ -68,4 +68,13 @@
     .form-cont{
         flex-direction: column;
     }
+    .left-side{
+      width: 95vw;
+      margin: auto;
+      padding: 10px 10px;
+    }
+    .right-side{
+      width: 95vw;
+      margin: auto;
+    }
 }

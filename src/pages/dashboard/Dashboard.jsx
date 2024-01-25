@@ -4,8 +4,11 @@ import { Button, TextField } from "@mui/material";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Parcel from '../../components/parcel/Parcel';
-
+import PersonIcon from '@mui/icons-material/Person';
+import Update2 from '../User/Update2';
+import User from '../User/User';
 function Dashboard({ token, onLogout }) {
+  //token decode function
   const decodeToken = (token) => {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace('-', '+').replace('_', '/');
@@ -79,52 +82,74 @@ function Dashboard({ token, onLogout }) {
       alert(`Error tracking parcel: ${error}`);
     }
   }
-  return (
-    <div className='dashboard-container'>
-      <h1>Welcome to {profileInfo.fullname}!</h1>
-      <div className="packaging">
-        <h1>Packaging convenience!</h1>
-        <p>Worried about the packaging of your parcel? Don't worry, the right packaging solution is now available at Zipifly. Order now...</p>
-        <Button variant="contained" color="success">Order now</Button>
-      </div>
-      <div className="tracking-parcel-container">
-        <h2>Track your parcel</h2>
-        <TextField
-          id="outlined-basic"
-          label="Parcel Id"
-          fullWidth
-          variant="outlined"
-          onChange={e => setTrackNumber(e.target.value)}
-        />
-        <div className="btn-con">
-          <Button variant="contained" color="success" onClick={handleTrackParcel}>Track</Button>
-          <Button variant="contained" color="error" onClick={() => setParcel({})}>Cancel</Button>
-        </div>
-      </div>
-      {/* display information of the parcel */}
-      {parcel.weight > 0 ? <Parcel id={parcel.id}
-        status={parcel.status}
-        sender={parcel.sender}
-        receiver={parcel.receiver}
-        weight={`${parcel.weight} kg`}
-        category={parcel.category}
-        totalCash={parcel.totalCash}
-      /> : <div className="null"></div>}
 
-      <div className="create-parcel-container">
-        <h1>Create your parcel</h1>
-        <p>Our rider will deliver your parcel without reveling your location</p>
-        <div className="btn-cnt">
-          <Button variant="contained"><Link to='/create-parcel'>Create</Link></Button>
+  const [modal, setModal] = useState(false)
+  const handleUserModalOpen = () => {
+    setModal(true);
+  }
+  const handleUserModalClose = () => {
+    setModal(false);
+  }
+
+  return (
+    <>
+      <div className={`dashboard-container ${modal ? 'dashboard-blur' : ''}`}>
+        <div className="user-container">
+          <h1>Welcome, {profileInfo.fullname}!</h1>
+          <Button variant="text" onClick={handleUserModalOpen}><PersonIcon /></Button>
         </div>
+        <div className="packaging">
+          <h1>Packaging convenience!</h1>
+          <p>Worried about the packaging of your parcel? Don't worry, the right packaging solution is now available at Zipifly. Order now...</p>
+          <Button variant="contained" color="success">Order now</Button>
+        </div>
+        <div className="tracking-parcel-container">
+          <h2>Track your parcel</h2>
+          <TextField
+            id="outlined-basic"
+            label="Parcel Id"
+            fullWidth
+            variant="outlined"
+            onChange={e => setTrackNumber(e.target.value)}
+          />
+          <div className="btn-con">
+            <Button variant="contained" color="success" onClick={handleTrackParcel}>Track</Button>
+            <Button variant="contained" color="error" onClick={() => setParcel({})}>Cancel</Button>
+          </div>
+        </div>
+        {/* display information of the parcel */}
+        {parcel.weight > 0 ? <Parcel id={parcel.id}
+          status={parcel.status}
+          sender={parcel.sender}
+          receiver={parcel.receiver}
+          weight={`${parcel.weight} kg`}
+          category={parcel.category}
+          totalCash={parcel.totalCash}
+        /> : <div className="null"></div>}
+
+        <div className="create-parcel-container">
+          <h1>Create your parcel</h1>
+          <p>Our rider will deliver your parcel without reveling your location</p>
+          <div className="btn-cnt">
+            <Button variant="contained"><Link to='/create-parcel'>Create</Link></Button>
+          </div>
+        </div>
+        <div className="create-parcel-container">
+          <h1>See your all parcels</h1>
+          <p>Track all of your parcels easily</p>
+          <Button variant="contained"><Link to='/all-parcels'>All Parcels</Link></Button>
+        </div>
+        <Button variant="contained" color='error' onClick={onLogout}>Logout</Button>
       </div>
-      <div className="create-parcel-container">
-        <h1>See your all parcels</h1>
-        <p>Track all of your parcels easily</p>
-        <Button variant="contained"><Link to='/all-parcels'>All Parcels</Link></Button>
-      </div>
-      <Button variant="contained" color='error' onClick={onLogout}>Logout</Button>
-    </div>
+      {modal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <User profileInfo={profileInfo} onClose={handleUserModalClose} />
+          </div>
+        </div>
+      )}
+    </>
+
   )
 }
 

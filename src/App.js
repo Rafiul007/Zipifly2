@@ -10,6 +10,7 @@ import CreateORder from "./pages/createOrder/CreateORder";
 import Update from "./pages/dashboard/Update";
 import Parcels from "./pages/all parcels/Parcels.jsx";
 import Service from "./pages/services/Service.jsx";
+import User from "./pages/User/User.jsx";
 function App() {
   return (
     <div className="App">

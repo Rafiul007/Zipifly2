@@ -10,3 +10,8 @@
     text-decoration: none;
     color: aliceblue;
 }
+@media (max-width: 400px) {
+    .table-container {
+        margin: 50px auto;
+    }
+}
